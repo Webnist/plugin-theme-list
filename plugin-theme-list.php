@@ -34,13 +34,6 @@ class PluginThemeListInit {
 		$this->version     = $data['version'];
 		$this->domain      = $data['domain'];
 		$this->domain_path = $data['domain_path'];
-		$this->default_options = array(
-			'slug'          => '',
-			'theme'         => '',
-		);
-		$this->options          = get_option( 'regulation-mobile', $this->default_options );
-		$this->slug             = $this->options['slug'] ? $this->options['slug'] : '';
-		$this->theme            = $this->options['theme'] ? $this->options['theme'] : '';
 		load_plugin_textdomain( $this->domain, false, $this->name . $this->domain_path );
 	}
 }

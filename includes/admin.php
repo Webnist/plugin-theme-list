@@ -164,8 +164,6 @@ class PluginThemeListAdmin extends PluginThemeListInit {
 
 	public function save_register_setting() {
 		global $plugin_page;
-		var_dump( $plugin_page );
-
 		register_setting( $this->basename, 'themes', array( &$this, 'register_themes' ) );
 		register_setting( $this->basename, 'plugins', array( &$this, 'register_pulgins' ) );
 	}
@@ -202,6 +200,7 @@ class PluginThemeListAdmin extends PluginThemeListInit {
 		}
 		return;
 	}
+
 	public function register_pulgins( $values ) {
 		require_once ABSPATH.'wp-admin/includes/plugin-install.php';
 		if ( $values ) {
@@ -238,7 +237,6 @@ class PluginThemeListAdmin extends PluginThemeListInit {
 
 	public function admin_enqueue_scripts( $hook ) {
 		global $plugin_page;
-		var_dump( $plugin_page );
 		if ( 'plugins-list' === $plugin_page || 'themes-list' === $plugin_page ) {
 			wp_enqueue_style( 'admin-plugin-theme-list', $this->url . '/css/admin-plugin-theme-list.css', array(), $this->version );
 			wp_enqueue_script( 'admin-plugin-theme-list', $this->url . '/js/admin-plugin-theme-list.js', array(), $this->version, true );
