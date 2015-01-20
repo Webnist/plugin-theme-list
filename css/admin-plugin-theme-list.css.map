@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEC,gBAAI;EACH,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI",
+"sources": ["admin-plugin-theme-list.scss"],
+"names": [],
+"file": "admin-plugin-theme-list.css"
+}
