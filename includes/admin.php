@@ -364,21 +364,14 @@ class PluginThemeListAdmin extends PluginThemeListInit {
 				$args  = array(
 					'slug' => $value,
 					'fields' => array(
-						'sections'       => false,
-						'icons'             => true,
-						'banners'           => true,
+						'sections' => false,
+						'icons'    => true,
+						'banners'  => true,
 					),
 				);
-				$query         = $api( $info, $args );
-				$slug          = $query->slug;
-				if ( 'plugins-list' === $plugin_page ) {
-					$author = key( $query->contributors );
-				} elseif ( 'themes-list' === $plugin_page ) {
-					$author = strip_tags( $theme->author );
-				}
-				$downloaded    = $query->downloaded;
-				$download_link = $query->download_link;
-				$directory_url = $url . $slug;
+				$query      = $api( $info, $args );
+				$slug       = $query->slug;
+				$downloaded = $query->downloaded;
 				$post = get_page_by_path( $slug, 'OBJECT', $plugin_page );
 				if ( empty( $post ) ) {
 					$title               = $query->name;
@@ -389,14 +382,21 @@ class PluginThemeListAdmin extends PluginThemeListInit {
 					$post['post_author'] = 1;
 					$post['post_type']   = $plugin_page;
 					$post_id             = wp_insert_post( $post );
+					if ( 'plugins-list' === $plugin_page ) {
+						$author = key( $query->contributors );
+					} elseif ( 'themes-list' === $plugin_page ) {
+						$author = strip_tags( $theme->author );
+					}
+					$download_link = $query->download_link;
+					$directory_url = $url . $slug;
+					update_post_meta( $post_id, 'author', $author );
+					update_post_meta( $post_id, 'download_link', $download_link );
+					update_post_meta( $post_id, 'directory_url', $directory_url );
 				} else {
-					$post_id             = $post->ID;
+					$post_id = $post->ID;
 				}
 				update_post_meta( $post_id, 'update_time', date_i18n( 'Y-m-d' ) );
-				update_post_meta( $post_id, 'author', $author );
 				update_post_meta( $post_id, 'downloaded', $downloaded );
-				update_post_meta( $post_id, 'download_link', $download_link );
-				update_post_meta( $post_id, 'directory_url', $directory_url );
 			}
 		}
 		return $values;
