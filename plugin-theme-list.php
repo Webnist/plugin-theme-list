@@ -17,6 +17,15 @@ if ( ! class_exists( 'PluginThemeListAdmin' ) )
 if ( ! class_exists( 'PluginThemeListPostType' ) )
 	require_once( dirname(__FILE__) . '/includes/post-type.php' );
 
+if ( ! class_exists( 'PluginThemeListAction' ) )
+	require_once( dirname(__FILE__) . '/includes/action.php' );
+
+if ( ! class_exists( 'PluginThemeListFilter' ) )
+	require_once( dirname(__FILE__) . '/includes/filter.php' );
+
+if ( ! class_exists( 'PluginThemeListTemplateTag' ) )
+	require_once( dirname(__FILE__) . '/includes/template-tag.php' );
+
 class PluginThemeListInit {
 
 	public function __construct() {
@@ -40,3 +49,6 @@ class PluginThemeListInit {
 new PluginThemeListInit();
 new PluginThemeListAdmin();
 new PluginThemeListPostType();
+new PluginThemeListAction();
+new PluginThemeListFilter();
+new PluginThemeListTemplateTag();
